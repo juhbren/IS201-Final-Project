@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/scratchstyles.css">
+    <title>My Page From Scratch</title>     
+</head>
+
+<body>
+         <nav>
+            <div>
+                <a href="#page-top"></a>
+                <h1>Jabren Thompson</h1>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Resume</a></li>
+                        <li class="nav-item"><a class="nav-link" href="fromscratch.html">My Scratch Page</a></li>
+                        <li class="nav-item"><a class="nav-link" href="webAPP.html">Web APP</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    <!-- HERO SECTION -->
+    <div class="hero-container">
+        <img src="assets/img/Sunset-banff.png" alt="Sunset in Banff">
+
+        <div class="hero-content">
+            <h1 class="hero-title">My Portfolio</h1>
+            <p class="hero-subtitle">Scroll down to see my work</p>
+        </div>
+    </div>
+
+    <!-- VIDEO REEL SECTION -->
+    <section id="reel">
+        <div class="video-section">
+            <h2>Highlight Reel</h2>
+            <p class="video-subtitle">A short look at some of my favorite work.</p>
+
+            <div class="video-container">
+                <iframe
+                    src="https://static1.squarespace.com/static/68d6d742d024cf2b338a4ec0/t/6933619b49ddef3ca492570e/1764975031119/AdvertIS201.mp4"
+                    title="Embedded video"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section><br>
+
+<section class="styledlist">
+  <div>
+    <ol>
+      <li>Types of shoots I love:
+        <ul>
+          <li>Landscape</li>
+          <li>Portraits</li>
+          <li>Real estate</li>
+        </ul>
+      </li>
+
+      <li>Future goals:
+        <ul>
+          <li>Start my own real estate photography business</li>
+          <li>Travel the world and capture stunning environments</li>
+          <li>Find a wife to share it all with…</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+</section>
+
+
+    <section is="gallery">
+            <div class="gallery-section">
+                <h2>My Tableau Integration</h2>
+                <a>Please allow time for my tableau embed to load</a><br><br>
+            </div>
+    </section><br>
+
+<div class="tableau-wrapper" style="
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+">
+    <div class='tableauPlaceholder' id='viz1765050088493' style="
+        position: relative;
+        width: 90vw;          /* responsive width */
+        max-width: 1400px;    /* keeps it from getting too wide */
+        margin: 0 auto;
+    ">
+        <noscript>
+            <a href='#'>
+                <img
+                    alt='viz'
+                    src='https://public.tableau.com/static/images/62/62YQDCM4H/1.png'
+                    style="border:none;"
+                />
+            </a>
+        </noscript>
+
+        <object class='tableauViz' style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+            <param name='embed_code_version' value='3' />
+            <param name='path' value='shared/62YQDCM4H' />
+            <param name='toolbar' value='yes' />
+            <param name='static_image' value='https://public.tableau.com/static/images/62/62YQDCM4H/1.png' />
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='en-US' />
+        </object>
+    </div>
+</div>
+
+<script type='text/javascript'>
+    var divElement = document.getElementById('viz1765050088493');
+    var vizElement = divElement.getElementsByTagName('object')[0];
+
+    // Responsive height: 75% of width (Tableau standard embed ratio)
+    vizElement.style.width = "100%";
+    vizElement.style.height = (divElement.offsetWidth * 0.75) + "px";
+
+    var scriptElement = document.createElement('script');
+    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+</script>
+
+
+</body>
+</html>

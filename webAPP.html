@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Focus Quest | IS 201 Web App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #111827;
+      --card: #020617;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.15);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --danger: #f97373;
+      --success: #4ade80;
+      --radius-lg: 18px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.9);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #1d283a, #020617 55%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: var(--text);
+    }
+
+    .app-shell {
+      width: 100%;
+      max-width: 780px;
+      background: linear-gradient(135deg, var(--bg-soft), #020617);
+      border-radius: 24px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .app-glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(56, 189, 248, 0.18), transparent 50%),
+        radial-gradient(circle at 90% 100%, rgba(56, 189, 248, 0.12), transparent 50%);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+    }
+
+    .app-inner {
+      position: relative;
+      padding: 22px 22px 20px;
+      z-index: 1;
+    }
+
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      gap: 12px;
+    }
+
+    .app-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .app-title h1 {
+      font-size: 1.5rem;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .app-badge {
+      font-size: 0.7rem;
+      border-radius: 999px;
+      padding: 3px 8px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+
+    .app-title span.subtitle {
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+
+    .app-pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      white-space: nowrap;
+    }
+
+    .app-pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+    }
+
+    .progress-wrap {
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .progress-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      overflow: hidden;
+      border: 1px solid rgba(30, 64, 175, 0.5);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #0ea5e9, #22c55e);
+      transition: width 260ms ease-out;
+    }
+
+    .question-card {
+      background: radial-gradient(circle at top left, #020617, #020617 45%);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      padding: 20px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .question-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    .question-hint {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .answers {
+      display: grid;
+      gap: 10px;
+    }
+
+    .answer-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(51, 65, 85, 0.7);
+      cursor: pointer;
+      transition: transform 140ms ease, border-color 140ms ease,
+        box-shadow 140ms ease, background 140ms ease;
+      position: relative;
+    }
+
+    .answer-option:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.85);
+      border-color: rgba(56, 189, 248, 0.7);
+      background: radial-gradient(circle at top left, #020617, #020617 60%);
+    }
+
+    .answer-option.selected {
+      border-color: var(--accent);
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.16), #020617);
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.9);
+    }
+
+    .answer-bullet {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      border: 2px solid rgba(148, 163, 184, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .answer-bullet-inner {
+      width: 10px;
+      height: 10px;
+      border-radius: inherit;
+      background: transparent;
+      transition: background 140ms ease, transform 140ms ease;
+    }
+
+    .answer-option.selected .answer-bullet {
+      border-color: var(--accent);
+    }
+
+    .answer-option.selected .answer-bullet-inner {
+      background: var(--accent);
+      transform: scale(1.05);
+    }
+
+    .answer-label-main {
+      font-size: 0.93rem;
+    }
+
+    .answer-label-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .question-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .nav-buttons {
+      margin-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      padding: 9px 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0ea5e9, #22c55e);
+      color: #020617;
+      font-weight: 600;
+      padding-inline: 20px;
+      box-shadow: 0 14px 30px rgba(34, 197, 94, 0.35);
+    }
+
+    .btn-primary[disabled] {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .result-card {
+      display: none;
+      margin-top: 16px;
+      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.18), #020617);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      padding: 18px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .result-title {
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .result-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.7);
+      margin-bottom: 10px;
+    }
+
+    .pill-dot-success {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--success);
+      box-shadow: 0 0 10px rgba(74, 222, 128, 0.9);
+    }
+
+    .result-body {
+      font-size: 0.9rem;
+      color: #e5e7eb;
+      margin-bottom: 10px;
+    }
+
+    .result-tips {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .result-score {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .result-actions {
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      border-radius: 999px;
+      padding: 4px 9px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .reset-btn {
+      margin-left: auto;
+      font-size: 0.78rem;
+      color: rgba(248, 250, 252, 0.9);
+      background: rgba(15, 23, 42, 0.85);
+      border-radius: 999px;
+      padding: 6px 11px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      cursor: pointer;
+    }
+
+    .reset-btn:hover {
+      border-color: var(--accent);
+    }
+
+    .error-text {
+      font-size: 0.78rem;
+      color: var(--danger);
+      margin-top: 6px;
+      display: none;
+    }
+
+    .app-footer {
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .app-footer a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px dashed transparent;
+    }
+
+    .app-footer a:hover {
+      border-bottom-color: rgba(56, 189, 248, 0.7);
+    }
+
+    @media (max-width: 640px) {
+      .app-inner {
+        padding: 16px 14px 14px;
+      }
+      .app-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-buttons {
+        flex-direction: column-reverse;
+      }
+      .btn-primary,
+      .btn-ghost {
+        justify-content: center;
+      }
+      .question-card {
+        padding: 16px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+            <div class="container px-5">
+                <a class="navbar-brand" href="#page-top">Jabren Thompson</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Resume</a></li>
+                        <li class="nav-item"><a class="nav-link" href="fromscratch.html">My Scratch Page</a></li>
+                        <li class="nav-item"><a class="nav-link" href="webAPP.html">Web APP</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav><br>
+  <div class="app-shell">
+    <div class="app-glow"></div>
+    <div class="app-inner">
+      <div class="app-header">
+        <div class="app-title">
+          <div class="app-badge">Mini Web App • IS 201</div>
+          <h1>
+            Focus Quest
+            <span style="font-size: 0.8rem; color: var(--accent); font-weight: 500;">
+              v1.0
+            </span>
+          </h1>
+          <span class="subtitle">Discover your productivity style in under 60 seconds.</span>
+        </div>
+        <div class="app-pill">
+          <div class="app-pill-dot"></div>
+          Interactive Quiz • JS + CSS
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <span class="progress-label" id="question-counter">Question 1 / 6</span>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="question-card" id="question-card">
+        <div class="question-tag">Question</div>
+        <div class="question-text" id="question-text"></div>
+        <div class="question-hint" id="question-hint"></div>
+        <div class="answers" id="answers-container"></div>
+        <div class="question-footer">
+          <span id="question-type-label">Choose one option that feels most like you.</span>
+          <button class="reset-btn" id="reset-btn" type="button">Reset quiz</button>
+        </div>
+        <div class="error-text" id="error-text">Pick an option before continuing.</div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-ghost" id="back-btn" type="button">
+          ← Back
+        </button>
+        <button class="btn-primary" id="next-btn" type="button">
+          Next →
+        </button>
+      </div>
+
+      <div class="result-card" id="result-card">
+        <div class="result-pill">
+          <span class="pill-dot-success"></span>
+          Your Focus Profile
+        </div>
+        <div class="result-title" id="result-title"></div>
+        <div class="result-body" id="result-body"></div>
+        <div class="result-tips" id="result-tips"></div>
+        <div class="result-score" id="result-score"></div>
+
+        <div class="result-actions">
+          <span class="chip">Tip: Screenshot this result</span>
+          <span class="chip">Or share your type with a friend</span>
+        </div>
+      </div>
+
+      <div class="app-footer">
+        <span>Built with vanilla HTML, CSS &amp; JS.</span>
+        <span>Made by <a href="#">Jabren Thompson & ChatGPT</a> for IS 201.</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        id: 1,
+        text: "When you sit down to work or study, what do you usually do first?",
+        hint: "This reveals how you like to organize your mental space.",
+        answers: [
+          {
+            label: "Make a quick plan or checklist.",
+            sub: "You like to see the path before you start walking.",
+            type: "planner",
+            score: 2,
+          },
+          {
+            label: "Jump right in and figure it out as I go.",
+            sub: "You gain momentum by doing, not overthinking.",
+            type: "sprinter",
+            score: 2,
+          },
+          {
+            label: "Tidy my space, grab water, get comfy first.",
+            sub: "Environment matters a lot to your focus.",
+            type: "architect",
+            score: 2,
+          },
+          {
+            label: "Scroll my phone “for a second” that sometimes becomes 10 minutes.",
+            sub: "You might need better guardrails, not more willpower.",
+            type: "juggler",
+            score: 2,
+          },
+        ],
+      },
+      {
+        id: 2,
+        text: "How do you feel about deadlines?",
+        hint: "Your answer shows how you relate to pressure.",
+        answers: [
+          {
+            label: "Love them. They keep me sharp.",
+            sub: "Pressure turns your ideas into action.",
+            type: "sprinter",
+            score: 3,
+          },
+          {
+            label: "I prefer to finish way before they’re due.",
+            sub: "You like the peace that comes from being ahead.",
+            type: "planner",
+            score: 3,
+          },
+          {
+            label: "I usually aim for the middle—neither too early nor last minute.",
+            sub: "Balance and pacing are your thing.",
+            type: "architect",
+            score: 2,
+          },
+          {
+            label: "I start late but somehow pull it off most of the time.",
+            sub: "You’re good in a crisis—but it’s risky.",
+            type: "juggler",
+            score: 3,
+          },
+        ],
+      },
+      {
+        id: 3,
+        text: "What tends to break your focus the most?",
+        hint: "These are usually the things worth designing around.",
+        answers: [
+          {
+            label: "My phone & notifications.",
+            sub: "You may need systems, not just discipline.",
+            type: "juggler",
+            score: 3,
+          },
+          {
+            label: "Thinking about everything else I still have to do.",
+            sub: "Your brain likes the whole map, not just the road in front of you.",
+            type: "planner",
+            score: 2,
+          },
+          {
+            label: "Noise or people around me.",
+            sub: "Your environment has a strong influence on you.",
+            type: "architect",
+            score: 3,
+          },
+          {
+            label: "Honestly, boredom. If it’s not stimulating, I drift.",
+            sub: "You need momentum and mini-challenges to stay engaged.",
+            type: "sprinter",
+            score: 2,
+          },
+        ],
+      },
+      {
+        id: 4,
+        text: "If you had a 3-hour study block, how would you structure it?",
+        hint: "There’s no right answer—just your natural rhythm.",
+        answers: [
+          {
+            label: "3 x 45-minute deep-focus blocks with short breaks.",
+            sub: "You like rhythm and clear segments.",
+            type: "planner",
+            score: 3,
+          },
+          {
+            label: "One long focused push, then a big break.",
+            sub: "You work best by building and riding a wave of momentum.",
+            type: "sprinter",
+            score: 3,
+          },
+          {
+            label: "Switch between tasks or subjects to keep things fresh.",
+            sub: "Variety keeps your mind engaged.",
+            type: "juggler",
+            score: 3,
+          },
+          {
+            label: "Set up a cozy, distraction-free environment, then go with the flow.",
+            sub: "Once the space feels right, the work follows.",
+            type: "architect",
+            score: 2,
+          },
+        ],
+      },
+      {
+        id: 5,
+        text: "How do you feel when plans suddenly change?",
+        hint: "Flexibility vs. structure—where do you land?",
+        answers: [
+          {
+            label: "I don’t like it—I prefer sticking to the original plan.",
+            sub: "Stability helps you do your best work.",
+            type: "planner",
+            score: 3,
+          },
+          {
+            label: "I adapt quickly—it’s not a big deal.",
+            sub: "You’re comfortable adjusting on the fly.",
+            type: "sprinter",
+            score: 2,
+          },
+          {
+            label: "It depends on my mood and energy that day.",
+            sub: "You read the situation before reacting.",
+            type: "architect",
+            score: 2,
+          },
+          {
+            label: "My whole schedule gets scrambled and I feel behind.",
+            sub: "A bit more structure could protect your focus.",
+            type: "juggler",
+            score: 3,
+          },
+        ],
+      },
+      {
+        id: 6,
+        text: "What would help you most right now with school or work?",
+        hint: "This points to your next high-leverage upgrade.",
+        answers: [
+          {
+            label: "A simple weekly planning routine I actually stick to.",
+            sub: "You’re ready for intentional structure.",
+            type: "planner",
+            score: 4,
+          },
+          {
+            label: "Short challenges or sprints that make things feel like a game.",
+            sub: "You’re motivated by intensity and short wins.",
+            type: "sprinter",
+            score: 4,
+          },
+          {
+            label: "A cleaner, more organized digital & physical space.",
+            sub: "You think better when your environment is dialed in.",
+            type: "architect",
+            score: 4,
+          },
+          {
+            label: "Better boundaries with my phone & distractions.",
+            sub: "You want to protect your attention like a resource.",
+            type: "juggler",
+            score: 4,
+          },
+        ],
+      },
+    ];
+
+    const questionTextEl = document.getElementById("question-text");
+    const questionHintEl = document.getElementById("question-hint");
+    const answersContainerEl = document.getElementById("answers-container");
+    const questionCounterEl = document.getElementById("question-counter");
+    const progressFillEl = document.getElementById("progress-fill");
+    const errorTextEl = document.getElementById("error-text");
+    const backBtn = document.getElementById("back-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const resultCardEl = document.getElementById("result-card");
+    const resultTitleEl = document.getElementById("result-title");
+    const resultBodyEl = document.getElementById("result-body");
+    const resultTipsEl = document.getElementById("result-tips");
+    const resultScoreEl = document.getElementById("result-score");
+    const resetBtn = document.getElementById("reset-btn");
+
+    let currentIndex = 0;
+    const selections = new Array(questions.length).fill(null);
+
+    function renderQuestion() {
+      const q = questions[currentIndex];
+
+      questionTextEl.textContent = q.text;
+      questionHintEl.textContent = q.hint;
+      questionCounterEl.textContent = `Question ${currentIndex + 1} / ${questions.length}`;
+
+      const progressPercentage = ((currentIndex) / questions.length) * 100;
+      progressFillEl.style.width = `${progressPercentage}%`;
+
+      answersContainerEl.innerHTML = "";
+      errorTextEl.style.display = "none";
+      resultCardEl.style.display = "none";
+
+      q.answers.forEach((answer, index) => {
+        const isSelected = selections[currentIndex] === index;
+        const optionEl = document.createElement("div");
+        optionEl.className = "answer-option" + (isSelected ? " selected" : "");
+        optionEl.dataset.index = index;
+
+        const bullet = document.createElement("div");
+        bullet.className = "answer-bullet";
+        const bulletInner = document.createElement("div");
+        bulletInner.className = "answer-bullet-inner";
+        bullet.appendChild(bulletInner);
+
+        const labelsWrap = document.createElement("div");
+        const labelMain = document.createElement("div");
+        labelMain.className = "answer-label-main";
+        labelMain.textContent = answer.label;
+        const labelSub = document.createElement("div");
+        labelSub.className = "answer-label-sub";
+        labelSub.textContent = answer.sub;
+        labelsWrap.appendChild(labelMain);
+        labelsWrap.appendChild(labelSub);
+
+        optionEl.appendChild(bullet);
+        optionEl.appendChild(labelsWrap);
+
+        optionEl.addEventListener("click", () => {
+          selections[currentIndex] = index;
+          document
+            .querySelectorAll(".answer-option")
+            .forEach((el) => el.classList.remove("selected"));
+          optionEl.classList.add("selected");
+          errorTextEl.style.display = "none";
+        });
+
+        answersContainerEl.appendChild(optionEl);
+      });
+
+      backBtn.disabled = currentIndex === 0;
+      backBtn.style.opacity = currentIndex === 0 ? "0.4" : "1";
+
+      if (currentIndex === questions.length - 1) {
+        nextBtn.textContent = "See my focus type →";
+      } else {
+        nextBtn.textContent = "Next →";
+      }
+    }
+
+    function calculateResult() {
+      const scores = {
+        planner: 0,
+        sprinter: 0,
+        architect: 0,
+        juggler: 0,
+      };
+      let totalScore = 0;
+
+      selections.forEach((selectedIndex, qIndex) => {
+        const q = questions[qIndex];
+        const answer = q.answers[selectedIndex];
+        scores[answer.type] += answer.score;
+        totalScore += answer.score;
+      });
+
+      let bestType = "planner";
+      let bestScore = scores[bestType];
+      for (const type in scores) {
+        if (scores[type] > bestScore) {
+          bestType = type;
+          bestScore = scores[type];
+        }
+      }
+
+      let title = "";
+      let body = "";
+      let tips = "";
+
+      switch (bestType) {
+        case "planner":
+          title = "You’re a Strategic Planner 🧠";
+          body =
+            "You think in maps, not just steps. You feel calmer and more powerful when you can see the big picture—deadlines, tasks, and priorities all laid out clearly. Once the plan exists, your brain relaxes and execution becomes way easier.";
+          tips =
+            "Lean into weekly planning: 10–15 minutes on Sunday can save you hours later. Use simple tools—like a whiteboard, paper list, or digital planner. Don’t over-design it: the best system is the one you’ll actually use every week.";
+          break;
+        case "sprinter":
+          title = "You’re a Momentum Sprinter ⚡️";
+          body =
+            "You thrive on short bursts of intensity and clear, time-boxed challenges. Long, vague work blocks drain you, but a focused sprint with a mini goal? That’s where you lock in and surprise yourself with how much you get done.";
+          tips =
+            "Use 20–40 minute sprints with a visible countdown timer. Turn your tasks into micro-challenges like “Draft the intro only” or “Finish 5 practice problems.” Reward yourself after each sprint with a tiny break or mini win.";
+          break;
+        case "architect":
+          title = "You’re an Environment Architect 🏛";
+          body =
+            "Your surroundings are a huge lever on your performance. When your space feels intentional—desk, lighting, music, tabs—your focus snaps into place. When it’s chaotic, your brain has to work twice as hard just to start.";
+          tips =
+            "Design a “focus scene”: same spot, same playlist, same vibe. Do a 3-minute reset before work—clear your desk, close distracting tabs, and set up just what you need for the next block of time.";
+          break;
+        case "juggler":
+          title = "You’re an Adaptive Juggler 🎪";
+          body =
+            "You’re naturally flexible, handling multiple things at once and reacting quickly when life changes plans. That’s a superpower—but it can also leave you scattered if everything feels equally urgent all the time.";
+          tips =
+            "Before you start multitasking, pick a true “priority 1” for the next hour. Put your phone in another room during that window if possible. Juggling is powerful—but only if you decide which ball matters most right now.";
+          break;
+      }
+
+      resultTitleEl.textContent = title;
+      resultBodyEl.textContent = body;
+      resultTipsEl.textContent = tips;
+      resultScoreEl.textContent =
+        "Behind the scenes, we use a simple scoring system to compare four styles: Planner, Sprinter, Architect, and Juggler. Your top style just means “this is the gear you naturally click into first.”";
+
+      const completionPercentage = (selections.filter((s) => s !== null).length / questions.length) * 100;
+      progressFillEl.style.width = `${completionPercentage}%`;
+
+      resultCardEl.style.display = "block";
+
+      try {
+        localStorage.setItem(
+          "focusQuestResult",
+          JSON.stringify({
+            bestType,
+            scores,
+            timestamp: new Date().toISOString(),
+          })
+        );
+      } catch (e) {
+        // ignore if localStorage not available
+      }
+    }
+
+    function handleNext() {
+      if (selections[currentIndex] === null) {
+        errorTextEl.style.display = "block";
+        return;
+      }
+
+      if (currentIndex === questions.length - 1) {
+        calculateResult();
+        return;
+      }
+
+      currentIndex++;
+      renderQuestion();
+    }
+
+    function handleBack() {
+      if (currentIndex === 0) return;
+      currentIndex--;
+      renderQuestion();
+    }
+
+    function resetQuiz() {
+      currentIndex = 0;
+      for (let i = 0; i < selections.length; i++) {
+        selections[i] = null;
+      }
+      resultCardEl.style.display = "none";
+      progressFillEl.style.width = "0%";
+      errorTextEl.style.display = "none";
+      renderQuestion();
+    }
+
+    nextBtn.addEventListener("click", handleNext);
+    backBtn.addEventListener("click", handleBack);
+    resetBtn.addEventListener("click", resetQuiz);
+
+    renderQuestion();
+  </script>
+</body>
+</html>

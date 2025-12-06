@@ -1,0 +1,165 @@
+/* General page style */
+body {
+    font-family: "Lato", sans-serif;
+    background-color: #f8f9fa;
+    color: #212529;
+    margin: 0;
+    padding: 0;
+}
+
+/* Section headings */
+h1, h2, h3 {
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 0.5rem;
+}
+
+/* Paragraph styling */
+p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+/* ---------------------- */
+/* HERO SECTION */
+/* ---------------------- */
+
+.hero-container {
+    position: relative;
+    width: 100%;
+}
+
+.hero-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Centers both heading + subheading together */
+.hero-content {
+    position: absolute;
+    top:40%;               /* adjust up/down on image */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5); /* improves readability */
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5); /* improves readability */
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    font-weight: 300;
+    margin-top: 0.5rem;
+    opacity: 0.95;
+}
+
+/* Mobile tweaks */
+@media (max-width: 600px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+}
+
+/* ---------------------- */
+/* VIDEO SECTION */
+/* ---------------------- */
+
+#reel {
+    padding: 3rem 1rem;
+}
+
+.video-section {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.video-section h2 {
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.video-subtitle {
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+    color: #000;
+}
+
+/* Responsive 16:9 wrapper */
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    background: #000;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.gallery-section {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.gallery-section h2 {
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
+}
+
+body {
+    background-color: rgb(248, 197, 189);
+}
+
+.tableau {
+    position: center;
+}
+
+.list_heading {
+    font-size: medium;
+}
+
+.styledlist ol {
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 20px;
+}
+
+.styledlist ul {
+  margin-top: 8px;
+  margin-left: 40px;
+  list-style-type: square;
+}
+
+.styledlist li {
+  margin-bottom: 6px;
+}
+
+.styledlist {
+    border: 3px solid red;
+    background-color: rgba(255, 0, 0, 0.05);
+}
+
