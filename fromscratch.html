@@ -8,25 +8,24 @@
 </head>
 
 <body>
-         <nav>
-            <div>
-                <a href="#page-top"></a>
-                <h1>Jabren Thompson</h1>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Resume</a></li>
-                        <li class="nav-item"><a class="nav-link" href="fromscratch.html">My Scratch Page</a></li>
-                        <li class="nav-item"><a class="nav-link" href="webAPP.html">Web APP</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+         <nav class="navbar">
+    <div class="nav-container">
+        <h1 class="nav-title">Jabren Thompson</h1>
+
+        <div class="nav-links">
+            <a href="index.html">Resume</a>
+            <a href="fromscratch.html">My Scratch Page</a>
+            <a href="webAPP.html">Web App</a>
+        </div>
+    </div>
+</nav>
 
     <!-- HERO SECTION -->
     <div class="hero-container">
         <img src="assets/img/Sunset-banff.png" alt="Sunset in Banff">
 
         <div class="hero-content">
+            
             <h1 class="hero-title">My Portfolio</h1>
             <p class="hero-subtitle">Scroll down to see my work</p>
         </div>
@@ -35,6 +34,7 @@
     <!-- VIDEO REEL SECTION -->
     <section id="reel">
         <div class="video-section">
+            <a href="#Tableau">Jump to Tableau</a>
             <h2>Highlight Reel</h2>
             <p class="video-subtitle">A short look at some of my favorite work.</p>
 
@@ -65,7 +65,7 @@
         <ul>
           <li>Start my own real estate photography business</li>
           <li>Travel the world and capture stunning environments</li>
-          <li>Find a wife to share it all with…</li>
+          <li>Find a wife to share it all with…</li><br><br>
         </ul>
       </li>
     </ol>
@@ -73,10 +73,10 @@
 </section>
 
 
-    <section is="gallery">
+    <section is="gallery" id="Tableau">
             <div class="gallery-section">
                 <h2>My Tableau Integration</h2>
-                <a>Please allow time for my tableau embed to load</a><br><br>
+                <a>Please allow time for my tableau embed to load</a><br><br><br><br>
             </div>
     </section><br>
 
@@ -130,6 +130,22 @@
     scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
     vizElement.parentNode.insertBefore(scriptElement, vizElement);
 </script>
+
+<script>
+  window.addEventListener('load', function () {
+    if (window.location.hash) {
+      // Remove the hash from the URL
+      history.replaceState(
+        null,
+        document.title,
+        window.location.pathname + window.location.search
+      );
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+  });
+</script>
+
 
 
 </body>
